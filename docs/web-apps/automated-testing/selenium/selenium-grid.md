@@ -203,3 +203,18 @@ Use our [Platform Configurator](https://saucelabs.com/platform/platform-configur
 - [White Paper: Selenium Grid Build vs. Buy](https://saucelabs.com/resources/white-papers/selenium-grid-build-vs-buy)
 - [Webinar: Selenium Grid Build vs. Buy](https://www.youtube.com/watch?v=mSxRf-zaa5I)
 - [Selenium Grid Documentation](https://www.selenium.dev/documentation/grid/)
+RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444"), browserOptions);java -jar selenium-server-<version>.jar node --config config.tomlSafariOptions browserOptions = new SafariOptions();
+browserOptions.setPlatformName("macOS 12");
+browserOptions.setBrowserVersion("15");
+Map<String, Object> sauceOptions = new HashMap<>();
+sauceOptions.put("build", "<your build id>");
+sauceOptions.put("name", "<your test name>");
+sauceOptions.put("username", System.getenv("SAUCE_USERNAME"));
+sauceOptions.put("accessKey", System.getenv("SAUCE_ACCESS_KEY"));
+browserOptions.setCapability("sauce:options", sauceOptions);
+RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444"), browserOptions);
+driver.get("https://www.saucedemo.com");
+driver.findElement(By.id("user-name")).sendKeys("standard_user");
+driver.findElement(By.id("password")).sendKeys("secret_sauce");
+driver.findElement(By.id("login-button")).click();
+driver.quit();RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444"), browserOptions);
